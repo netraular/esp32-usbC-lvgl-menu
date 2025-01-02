@@ -1,5 +1,9 @@
 #include <Arduino.h>
+#include "config.h"
 #include "MainScreen.h"
+#include "../ScreenManager.h"
+
+extern ScreenManager screenManager;
 
 void MainScreen::load() {
     lv_obj_t* label = lv_label_create(lv_scr_act());
@@ -13,5 +17,10 @@ void MainScreen::update() {
 }
 
 void MainScreen::handleButtonPress(int button) {
-    // Lógica para manejar los botones en la pantalla principal
+    if (button == 1) {
+        // Hacer sonar el buzzer
+        tone(BUZZER_PIN, 1000, 200);
+        // Cambiar a SecondScreen
+        screenManager.setScreen("SecondScreen");
+    }
 }
